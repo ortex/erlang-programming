@@ -1,0 +1,1 @@
+This is the solving exercises code repository for Erlang Programming by Francesco Cesarini and Simon Thompson

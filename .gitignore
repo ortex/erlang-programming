@@ -1,0 +1,4 @@
+.idea/
+erlang-programming.iml
+
+*.beam
