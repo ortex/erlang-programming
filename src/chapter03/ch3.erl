@@ -4,6 +4,7 @@
 -export([create/1, reverse_create/1]).
 -export([print_n/1, print_odd_n/1]).
 -export([filter/2, reverse/1, concatenate/1, flatten/1]).
+-export([quicksort/1, mergesort/1]).
 
 %% 3.1
 sum(0) -> 0;
@@ -76,3 +77,24 @@ flatten([H | T]) when not(is_list(H)) ->
 flatten([H | T]) ->
   flatten(H) ++ flatten(T).
 
+
+%% 3.6
+
+quicksort([]) -> [];
+quicksort([H | T]) ->
+  quicksort([X || X <- T, X < H]) ++
+  [H] ++
+  quicksort([X || X <- T, X >= H]).
+
+mergesort([]) -> [];
+mergesort([E]) -> [E];
+mergesort(L) ->
+  {A, B} = lists:split(trunc(length(L) / 2), L),
+  merge(mergesort(A), mergesort(B)).
+
+merge(A, []) -> A;
+merge([], B) -> B;
+merge([Ha | Ta], [Hb | Tb]) when Ha < Hb ->
+  [Ha | merge(Ta, [Hb | Tb])];
+merge([Ha | Ta], [Hb | Tb]) ->
+  [Hb | merge([Ha | Ta], Tb)].
