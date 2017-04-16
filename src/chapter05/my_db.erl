@@ -11,7 +11,7 @@ init() ->
 
 
 stop() ->
-  call(quit).
+  call(stop).
 
 write(Key, Element) ->
   call({write, Key, Element}).
@@ -45,7 +45,9 @@ loop(Db) ->
       loop(NewDb);
     {request, Pid, {match, E}} ->
       reply(Pid, match(E, Db)),
-      loop(Db)
+      loop(Db);
+    {request, Pid, stop} ->
+      reply(Pid, ok)
   end.
 
 reply(Pid, Msg) ->
